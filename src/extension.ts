@@ -4,6 +4,8 @@ import {
 	window,
 	workspace,
 	ExtensionContext,
+	Position,
+	Selection,
 	StatusBarAlignment,
 } from 'vscode';
 
@@ -15,6 +17,7 @@ import {
 } from 'vscode-languageclient';
 
 import {
+	edit,
 	error,
 	info,
 	ready,
@@ -54,6 +57,12 @@ export function activate (context: ExtensionContext) {
 			statusBar.text = `$(check)markuplint[v${data.version}]`;
 		});
 
+		client.onRequest(edit, (fixed) => {
+			window.activeTextEditor.edit((edited) => {
+				edited.replace(client.protocol2CodeConverter.asRange(fixed.range), fixed.newText);
+			});
+		});
+
 		client.onNotification(error, (message) => {
 			window.showErrorMessage(message);
 		});
@@ -64,8 +73,8 @@ export function activate (context: ExtensionContext) {
 
 		client.onNotification(info, (message) => {
 			window.showInformationMessage(message);
+			window.showInformationMessage(JSON.stringify(window.activeTextEditor.setDecorations));
 		});
-
 	});
 
 }
