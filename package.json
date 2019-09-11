@@ -2,20 +2,20 @@
 	"name": "vscode-markuplint",
 	"displayName": "markuplint",
 	"description": "markuplint for VS Code",
-	"version": "0.8.0",
+	"version": "1.0.0-alpha",
 	"publisher": "yusukehirao",
 	"license": "MIT",
 	"repository": "git@github.com:YusukeHirao/vscode-markuplint.git",
-	"icon": "media/icon.png",
+	"icon": "https://github.com/markuplint/vscode-markuplint/blob/master/media/icon.png",
 	"galleryBanner": {
 		"color": "#0071BC",
 		"theme": "dark"
 	},
 	"engines": {
-		"vscode": "^1.18.0"
+		"vscode": "^1.38.0"
 	},
 	"categories": [
-		"Languages",
+		"Programming Languages",
 		"Linters"
 	],
 	"activationEvents": [
@@ -45,19 +45,30 @@
 	"scripts": {
 		"vscode:prepublish": "npm run compile",
 		"compile": "tsc -p ./",
-		"watch": "tsc -watch -p ./",
-		"postinstall": "node ./node_modules/vscode/bin/install"
+		"dev": "tsc -watch -p ./"
+	},
+	"prettier": {
+		"printWidth": 120,
+		"tabWidth": 4,
+		"useTabs": true,
+		"singleQuote": true,
+		"trailingComma": "all",
+		"bracketSpacing": true
 	},
 	"devDependencies": {
-		"@types/node": "7",
-		"tslint": "^5.9.1",
-		"typescript": "^2.7.2",
-		"vscode": "^1.1.10"
+		"@types/node": "12.7.5",
+		"@types/vscode": "^1.38.0",
+		"eslint": "^6.3.0",
+		"eslint-config-prettier": "^6.3.0",
+		"eslint-plugin-prettier": "^3.1.0",
+		"prettier": "^1.18.2",
+		"tslint": "^5.20.0",
+		"typescript": "^3.6.3"
 	},
 	"dependencies": {
-		"markuplint": "0.21.0",
+		"markuplint": "1.0.0-alpha.12",
 		"util.promisify": "^1.0.0",
-		"vscode-languageclient": "^3.5.0",
-		"vscode-languageserver": "^3.5.0"
+		"vscode-languageclient": "^5.2.1",
+		"vscode-languageserver": "^5.2.1"
 	}
 }
